@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
+import { View } from 'react-native';
 
 
 import {
@@ -12,8 +13,9 @@ import {
 
 import theme from './src/global/styles/theme';
 
-import Dashboard from './src/components/screens/Dashboard';
-import { View } from 'react-native';
+
+import {Dashboard} from './src/screens/Dashboard';
+import { Register } from './src/screens/Register';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -55,7 +57,7 @@ export default function App() {
       }}
     >
       <ThemeProvider theme={theme}>
-        <Dashboard />
+        <Register />
       </ThemeProvider>
     </View>
   )
