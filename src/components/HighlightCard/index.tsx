@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { 
-  Container ,
+import {
+  Container,
   Header,
   Title,
   Icon,
@@ -20,32 +20,27 @@ interface HighlightCardProps {
 const icons = {
   up: 'arrow-up-circle',
   down: 'arrow-down-circle',
-  total: 'dollar-sign'
+  total: 'dollar-sign',
 }
 
-export function HighlightCard({amount, lastTransaction, title, type }: HighlightCardProps) {
+export function HighlightCard({
+  amount,
+  lastTransaction,
+  title,
+  type,
+}: HighlightCardProps) {
   return (
     <Container type={type}>
       <Header>
-        <Title type={type}>
-          {title}
-        </Title>
-        <Icon 
-          name={icons[type]} 
-          type={type} 
-        />
+        <Title type={type}>{title}</Title>
+        <Icon name={icons[type]} type={type} />
       </Header>
 
       <Footer>
-        <Amount type={type}>
-          {amount}
-        </Amount>
+        <Amount type={type}>{amount}</Amount>
 
-        <LastTransaction type={type}>
-          {lastTransaction}
-        </LastTransaction>
+        <LastTransaction type={type}>{lastTransaction}</LastTransaction>
       </Footer>
-
     </Container>
   )
 }
