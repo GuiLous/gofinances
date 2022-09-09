@@ -26,6 +26,7 @@ import {
 import { ptBR } from 'date-fns/locale'
 import { LoadContainer } from '../Dashboard/styles'
 import { ActivityIndicator } from 'react-native'
+import { useAuth } from '../../hooks/auth'
 
 interface TotalByCategoryData {
   key: string
@@ -43,6 +44,8 @@ export function Resume() {
     TotalByCategoryData[]
   >([])
 
+  const { user } = useAuth()
+
   function handleDateChange(action: 'next' | 'prev') {
     if (action === 'next') {
       const newDate = addMonths(selectedDate, 1)
@@ -56,7 +59,7 @@ export function Resume() {
   async function loadTransactions() {
     setIsLoading(true)
 
-    const dataKey = '@gofinances:transactions'
+    const dataKey = `@gofinances:transactions_user:${user.id}`
 
     const response = await AsyncStorage.getItem(dataKey)
     const responseFormatted = response ? JSON.parse(response) : []

@@ -8,7 +8,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import * as Font from 'expo-font'
 import { ThemeProvider } from 'styled-components'
 import { StatusBar, View } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { AuthProvider, useAuth } from './src/hooks/auth'
 
 import {
   Poppins_400Regular,
@@ -18,12 +18,11 @@ import {
 
 import theme from './src/global/styles/theme'
 
-// import { AppRoutes } from './src/routes/app.routes'
-import { SignIn } from './src/screens/SignIn'
-import { AuthProvider } from './src/hooks/auth'
+import { Routes } from './src/routes'
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false)
+  const { userStorageLoading } = useAuth()
 
   useEffect(() => {
     async function prepare() {
@@ -50,7 +49,7 @@ export default function App() {
     }
   }, [appIsReady])
 
-  if (!appIsReady) {
+  if (!appIsReady || userStorageLoading) {
     return null
   }
 
@@ -62,12 +61,10 @@ export default function App() {
       }}
     >
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <StatusBar barStyle="light-content" />
-          <AuthProvider>
-            <SignIn />
-          </AuthProvider>
-        </NavigationContainer>
+        <StatusBar barStyle="light-content" />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </ThemeProvider>
     </View>
   )
